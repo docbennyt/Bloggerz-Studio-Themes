@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html b:version="2" expr:dir="data:blog.languageDirection"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://www.google.com/2005/gml/b"
+      xmlns:data="http://www.google.com/2005/gml/data"
+      xmlns:expr="http://www.google.com/2005/gml/expr">
+  <head>
+    <title><data:blog.pageTitle/></title>
+    <!-- Include Blogger default metadata and scripts -->
+    <b:include data='blog' name='all-head-content'/>
+    <!-- Portfolio Grid CSS skin -->
+    <b:skin><![CDATA[
+      /*
+       * Portfolio Grid Theme
+       * A gallery‑style Blogger theme for photographers, designers and artists. It
+       * features a responsive masonry grid, hover overlays, dynamic category
+       * filtering, built‑in lightbox and dark mode—all in a free template that
+       * rivals premium portfolio themes.
+       */
+      :root {
+        --pg-bg: #ffffff;
+        --pg-surface: #f8f9fa;
+        --pg-text: #1f2937;
+        --pg-primary: #e11d48;
+        --pg-secondary: #6d28d9;
+        --pg-radius: 4px;
+      }
+      body.dark-mode {
+        --pg-bg: #0f172a;
+        --pg-surface: #1e293b;
+        --pg-text: #e2e8f0;
+        --pg-primary: #c026d3;
+        --pg-secondary: #7c3aed;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", "Helvetica Neue", sans-serif;
+        background: var(--pg-bg);
+        color: var(--pg-text);
+        line-height: 1.7;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      a {
+        color: var(--pg-primary);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 90;
+        background: var(--pg-surface);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      }
+      #bz-ads-header {
+        text-align: center;
+        padding: 0.25rem;
+        font-size: 0.875rem;
+      }
+      #bz-nav-pages {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+      }
+      #bz-nav-pages ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 1rem;
+      }
+      #bz-nav-pages li { margin: 0; }
+      #bz-nav-pages a { font-weight: 600; }
+      .nav-toggle {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .action-button {
+        background: none;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--pg-radius);
+        color: var(--pg-text);
+      }
+      .action-button:hover {
+        background: rgba(0,0,0,0.05);
+      }
+      @media (max-width: 768px) {
+        #bz-nav-pages ul {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          margin-top: 0.5rem;
+        }
+        #bz-nav-pages.active ul { display: flex; }
+        .nav-toggle { display: block; }
+      }
+      /* Category filter bar */
+      #portfolio-filter {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: var(--pg-surface);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        overflow-x: auto;
+      }
+      #portfolio-filter a {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.875rem;
+        border: 1px solid var(--pg-primary);
+        border-radius: var(--pg-radius);
+        color: var(--pg-primary);
+        background: var(--pg-surface);
+        white-space: nowrap;
+      }
+      #portfolio-filter a.active {
+        background: var(--pg-primary);
+        color: #ffffff;
+      }
+      /* Hero section */
+      #hero {
+        background: var(--pg-surface);
+        padding: 2rem 1rem;
+        text-align: center;
+      }
+      #hero h1, #hero h2, #hero p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      /* Main grid */
+      main#main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
+      .post {
+        position: relative;
+        background: var(--pg-surface);
+        border-radius: var(--pg-radius);
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        transition: transform 0.1s ease;
+      }
+      .post:hover {
+        transform: translateY(-2px);
+      }
+      .post img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 1rem;
+      }
+      .post:hover .overlay {
+        opacity: 1;
+      }
+      .overlay h3 {
+        margin: 0;
+        font-size: 1.125rem;
+      }
+      .overlay span {
+        font-size: 0.75rem;
+        opacity: 0.8;
+      }
+      .overlay a {
+        margin-top: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: var(--pg-primary);
+        border-radius: var(--pg-radius);
+        color: #ffffff;
+        font-size: 0.875rem;
+        text-decoration: none;
+      }
+      .overlay a:hover {
+        background: var(--pg-secondary);
+      }
+      /* Sidebar */
+      aside#sidebar {
+        max-width: 300px;
+        padding: 1rem;
+        margin: 0 auto;
+      }
+      aside#sidebar .widget {
+        background: var(--pg-surface);
+        padding: 1rem;
+        border-radius: var(--pg-radius);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        margin-bottom: 1rem;
+      }
+      .ad-slot {
+        background: var(--pg-surface);
+        border: 1px dashed rgba(0,0,0,0.2);
+        border-radius: var(--pg-radius);
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 1rem;
+      }
+      /* Lightbox */
+      .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+      }
+      .lightbox img {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: var(--pg-radius);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      }
+      /* Footer */
+      footer {
+        background: var(--pg-surface);
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.75rem;
+        color: #6b7280;
+        border-top: 1px solid rgba(0,0,0,0.05);
+      }
+      #bz-footer-links {
+        margin-bottom: 0.5rem;
+      }
+      #bz-footer-links ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      #bz-footer-links a { font-weight: 500; }
+      #bz-footer-legal {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .bz-badge {
+        background: rgba(0,0,0,0.05);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        color: var(--pg-text);
+      }
+      /* Back to top */
+      #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 1rem;
+        display: none;
+        background: var(--pg-primary);
+        color: #ffffff;
+        border: none;
+        border-radius: var(--pg-radius);
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        font-size: 0.875rem;
+        z-index: 90;
+      }
+      #back-to-top:hover {
+        background: var(--pg-secondary);
+      }
+    ]]></b:skin>
+  </head>
+  <body expr:class='post'>
+    <!-- Header with ad and navigation -->
+    <header>
+      <!-- Top advertisement banner -->
+      <b:section id='bz-ads-header' class='section' showaddelement='yes' maxwidgets='1'>
+        <b:widget id='HTML1' type='HTML' locked='false' title='Header Ad'/>
+      </b:section>
+      <div id='bz-nav-pages'>
+        <span class='nav-toggle' onclick='this.parentNode.classList.toggle("active")'>☰</span>
+        <b:section id='bz-nav-pages' class='section' showaddelement='no' maxwidgets='1'>
+          <b:widget id='PageList1' type='PageList' locked='false' title='Pages'/>
+        </b:section>
+        <div class='header-actions'>
+          <button id='dark-toggle' class='action-button' title='Toggle dark mode'>🌙</button>
+        </div>
+      </div>
+    </header>
+    <!-- Category filter bar -->
+    <div id='portfolio-filter'>
+      <b:section id='portfolio-filter' class='section' showaddelement='no' maxwidgets='1'>
+        <b:widget id='LinkList1' type='LinkList' locked='false' title='Portfolio Categories'/>
+      </b:section>
+    </div>
+    <!-- Hero section -->
+    <section id='hero'>
+      <b:section id='hero' class='section' showaddelement='yes' maxwidgets='1'>
+        <b:widget id='HTML2' type='HTML' locked='false' title='Hero Section'/>
+      </b:section>
+    </section>
+    <!-- Main portfolio grid -->
+    <main id='main'>
+      <b:section id='main' class='section' showaddelement='no' maxwidgets='1'>
+        <b:widget id='Blog1' type='Blog' locked='false' title='Portfolio Posts'/>
+      </b:section>
+    </main>
+    <!-- Sidebar for profile and categories -->
+    <aside id='sidebar'>
+      <b:section id='sidebar' class='section' showaddelement='no' maxwidgets='2'>
+        <b:widget id='Profile1' type='Profile' locked='false' title='About Me'/>
+        <b:widget id='Label1' type='Label' locked='false' title='Labels'/>
+      </b:section>
+      <div class='ad-slot'>Advertisement</div>
+    </aside>
+    <!-- Lightbox overlay -->
+    <div id='lightbox' class='lightbox'>
+      <img id='lightbox-img' src='' alt='Lightbox Image'/>
+    </div>
+    <!-- Back to top button -->
+    <button id='back-to-top' aria-label='Back to top'>↑</button>
+    <!-- Footer -->
+    <footer>
+      <div id='bz-footer-links'>
+        <b:section id='bz-footer-links' class='section' showaddelement='no' maxwidgets='1'>
+          <b:widget id='LinkList2' type='LinkList' locked='false' title='Footer Links'/>
+        </b:section>
+      </div>
+      <div id='bz-footer-legal'>
+        <span>© <data:blog.title/></span>
+        <span class='bz-badge'>Powered by BZ</span>
+      </div>
+    </footer>
+    <!-- JavaScript for dark mode, category filtering, lightbox and back to top -->
+    <script type='text/javascript'>
+      //<![CDATA[
+      (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+          // Dark mode toggle
+          var darkToggle = document.getElementById('dark-toggle');
+          if (darkToggle) {
+            darkToggle.addEventListener('click', function() {
+              document.body.classList.toggle('dark-mode');
+            });
+          }
+          // Back to top button
+          var backToTop = document.getElementById('back-to-top');
+          if (backToTop) {
+            window.addEventListener('scroll', function() {
+              if (window.pageYOffset > 400) {
+                backToTop.style.display = 'block';
+              } else {
+                backToTop.style.display = 'none';
+              }
+            });
+            backToTop.addEventListener('click', function() {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+          }
+          // Category filtering
+          var filterBar = document.getElementById('portfolio-filter');
+          if (filterBar) {
+            var filterLinks = filterBar.querySelectorAll('a');
+            filterLinks.forEach(function(link) {
+              link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var href = this.getAttribute('href') || '';
+                var category = href.replace('#','').toLowerCase();
+                // Set active class
+                filterLinks.forEach(function(l) { l.classList.remove('active'); });
+                this.classList.add('active');
+                // Filter posts
+                var posts = document.querySelectorAll('.post');
+                posts.forEach(function(post) {
+                  var pCat = post.getAttribute('data-category');
+                  if (!pCat) {
+                    var labelEl = post.querySelector('.post-labels a');
+                    pCat = labelEl ? labelEl.textContent.trim().toLowerCase() : '';
+                    post.setAttribute('data-category', pCat);
+                  }
+                  if (category === 'all' || category === '' || pCat === category) {
+                    post.style.display = '';
+                  } else {
+                    post.style.display = 'none';
+                  }
+                });
+              });
+            });
+          }
+          // Lightbox functionality
+          var lightbox = document.getElementById('lightbox');
+          var lightboxImg = document.getElementById('lightbox-img');
+          var main = document.getElementById('main');
+          if (lightbox && lightboxImg && main) {
+            main.addEventListener('click', function(e) {
+              var target = e.target;
+              if (target && target.tagName.toLowerCase() === 'img') {
+                lightboxImg.src = target.src;
+                lightbox.style.display = 'flex';
+              }
+            });
+            lightbox.addEventListener('click', function() {
+              lightbox.style.display = 'none';
+            });
+            document.addEventListener('keydown', function(e) {
+              if (e.key === 'Escape') {
+                lightbox.style.display = 'none';
+              }
+            });
+          }
+        });
+      })();
+      //]]>
+    </script>
+  </body>
+</html>

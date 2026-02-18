@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html b:version="2" expr:dir="data:blog.languageDirection"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://www.google.com/2005/gml/b"
+      xmlns:data="http://www.google.com/2005/gml/data"
+      xmlns:expr="http://www.google.com/2005/gml/expr">
+  <head>
+    <title><data:blog.pageTitle/></title>
+    <!-- Default Blogger metadata and scripts -->
+    <b:include data='blog' name='all-head-content'/>
+    <!-- Theme Styles -->
+    <b:skin><![CDATA[
+      /* Root tokens for MonetizePro Lite. These values control the color
+         palette, border radii and shadows throughout the theme. */
+      :root {
+        --mp-primary-color: #16a34a; /* trust‑inducing green */
+        --mp-secondary-color: #15803d;
+        --mp-positive-color: #059669;
+        --mp-negative-color: #dc2626;
+        --mp-bg: #fefefe;
+        --mp-surface: #ffffff;
+        --mp-border-radius: 6px;
+        --mp-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        --mp-text-color: #1f2937;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: var(--mp-bg);
+        color: var(--mp-text-color);
+        line-height: 1.6;
+      }
+      a {
+        color: var(--mp-primary-color);
+        text-decoration: none;
+      }
+      a:hover {
+        color: var(--mp-secondary-color);
+      }
+      header {
+        background: var(--mp-surface);
+        box-shadow: var(--mp-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 30;
+      }
+      /* Top advertisement bar */
+      #bz-ads-header {
+        text-align: center;
+        padding: 0.25rem;
+        background: var(--mp-surface);
+      }
+      /* Navigation container */
+      #bz-nav-pages {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+      }
+      #bz-nav-pages ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 1rem;
+      }
+      #bz-nav-pages li { margin: 0; }
+      #bz-nav-pages a { font-weight: 600; }
+      .nav-toggle {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
+      @media (max-width: 768px) {
+        #bz-nav-pages ul {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          margin-top: 0.5rem;
+        }
+        #bz-nav-pages.active ul { display: flex; }
+        .nav-toggle { display: block; }
+      }
+      /* Hero section for top picks or comparison area */
+      #hero {
+        padding: 1rem;
+        background: var(--mp-surface);
+        box-shadow: var(--mp-shadow);
+        margin-bottom: 1rem;
+      }
+      /* Category filter bar */
+      #category-bar {
+        overflow-x: auto;
+        white-space: nowrap;
+        margin: 0;
+        background: var(--mp-surface);
+        border-top: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      #category-bar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0.5rem 1rem;
+        display: flex;
+        gap: 1rem;
+      }
+      #category-bar li { margin: 0; }
+      #category-bar a {
+        padding: 0.5rem 1rem;
+        border-radius: var(--mp-border-radius);
+        background: #f0fdf4;
+        color: var(--mp-primary-color);
+        font-size: 0.875rem;
+        white-space: nowrap;
+      }
+      #category-bar a:hover {
+        background: var(--mp-primary-color);
+        color: #ffffff;
+      }
+      /* Main content grid */
+      main#main {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+      }
+      /* Post cards */
+      .post-card {
+        background: var(--mp-surface);
+        border-radius: var(--mp-border-radius);
+        box-shadow: var(--mp-shadow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .post-card img {
+        width: 100%;
+        height: auto;
+      }
+      .post-card .post-content {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .post-card .post-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin: 0;
+      }
+      .post-card .post-excerpt {
+        font-size: 0.875rem;
+        color: #4b5563;
+        flex-grow: 1;
+      }
+      .post-card .post-meta {
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+      .post-card .cta-button {
+        align-self: flex-start;
+      }
+      /* Call‑to‑action button style */
+      .cta-button {
+        background: var(--mp-primary-color);
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        border-radius: var(--mp-border-radius);
+        font-weight: 600;
+        display: inline-block;
+      }
+      .cta-button:hover {
+        background: var(--mp-secondary-color);
+      }
+      /* Rating stars. Users insert spans with class "filled" or "empty". */
+      .rating-stars {
+        font-size: 1rem;
+        line-height: 1;
+        display: flex;
+      }
+      .rating-stars span {
+        font-family: "Arial", sans-serif;
+        margin-right: 0.1rem;
+      }
+      .rating-stars .filled { color: var(--mp-positive-color); }
+      .rating-stars .empty { color: #d1d5db; }
+      /* Summary box for review posts */
+      .summary-box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: var(--mp-border-radius);
+        padding: 1rem;
+        background: var(--mp-surface);
+        margin-bottom: 1rem;
+      }
+      .summary-box .rating {
+        flex: 1 1 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1rem;
+      }
+      .summary-box .pros-cons {
+        flex: 1 1 100%;
+        display: flex;
+        gap: 1rem;
+      }
+      .summary-box .pros-cons ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .summary-box .pros-cons li::before {
+        content: "\2713";
+        margin-right: 0.5rem;
+        color: var(--mp-positive-color);
+      }
+      .summary-box .cons li::before {
+        content: "\00D7";
+        color: var(--mp-negative-color);
+      }
+      /* Comparison table styling */
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+        display: block;
+        overflow-x: auto;
+      }
+      .comparison-table thead {
+        background: #f3f4f6;
+      }
+      .comparison-table th,
+      .comparison-table td {
+        padding: 0.75rem;
+        border: 1px solid #e5e7eb;
+        text-align: left;
+      }
+      .comparison-table tbody tr:nth-child(odd) {
+        background: #f9fafb;
+      }
+      /* Ad slot placeholder styling */
+      .ad-slot {
+        background: #f3f4f6;
+        border: 1px dashed #d1d5db;
+        border-radius: var(--mp-border-radius);
+        padding: 1rem;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      /* Sidebar widgets */
+      aside#sidebar {
+        padding: 1rem;
+      }
+      aside#sidebar .widget {
+        background: var(--mp-surface);
+        border-radius: var(--mp-border-radius);
+        box-shadow: var(--mp-shadow);
+        margin-bottom: 1rem;
+        padding: 1rem;
+      }
+      /* Footer styling */
+      footer {
+        background: var(--mp-surface);
+        padding: 1rem;
+        border-top: 1px solid #e5e7eb;
+      }
+      #bz-footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      #bz-footer-links ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      #bz-footer-links li { margin: 0; }
+      #bz-footer-legal {
+        margin-top: 1rem;
+        font-size: 0.75rem;
+        color: #6b7280;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .bz-badge {
+        background: #e5e7eb;
+        color: #374151;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+      }
+    ]]></b:skin>
+  </head>
+  <body expr:class='post'>
+    <!-- Header with ad bar and navigation -->
+    <header>
+      <!-- Top advertisement banner -->
+      <b:section id='bz-ads-header' class='section' showaddelement='yes' maxwidgets='1'>
+        <!-- Users insert AdSense code here via HTML1 widget -->
+        <b:widget id='HTML1' type='HTML' locked='false' title='Header Ad'/>
+      </b:section>
+      <!-- Navigation container -->
+      <div id='bz-nav-pages'>
+        <span class='nav-toggle' onclick='this.parentNode.classList.toggle("active")'>☰</span>
+        <b:section id='bz-nav-pages' class='section' showaddelement='no' maxwidgets='1'>
+          <b:widget id='PageList1' type='PageList' locked='false' title='Pages'/>
+        </b:section>
+        <!-- Search bar -->
+        <b:section id='nav-search' class='section' showaddelement='no' maxwidgets='1'>
+          <b:widget id='BlogSearch1' type='BlogSearch' locked='false' title='Search'/>
+        </b:section>
+      </div>
+    </header>
+    <!-- Hero section for top picks/comparison -->
+    <section id='hero'>
+      <b:section id='hero' class='section' showaddelement='yes' maxwidgets='1'>
+        <b:widget id='HTML2' type='HTML' locked='false' title='Hero Section'/>
+      </b:section>
+    </section>
+    <!-- Category filter bar -->
+    <nav id='category-bar'>
+      <b:section id='category-bar' class='section' showaddelement='no' maxwidgets='1'>
+        <b:widget id='LinkList1' type='LinkList' locked='false' title='Categories'/>
+      </b:section>
+    </nav>
+    <!-- Main content area -->
+    <main id='main'>
+      <b:section id='main' class='section' showaddelement='no' maxwidgets='1'>
+        <b:widget id='Blog1' type='Blog' locked='false' title='Blog Posts'/>
+      </b:section>
+    </main>
+    <!-- Sidebar with widgets and ad placeholder -->
+    <aside id='sidebar'>
+      <b:section id='sidebar' class='section' showaddelement='no' maxwidgets='2'>
+        <b:widget id='Profile1' type='Profile' locked='false' title='About Author'/>
+        <b:widget id='Label1' type='Label' locked='false' title='Labels'/>
+      </b:section>
+      <!-- Static ad slot; insert your ad code in place of this text -->
+      <div class='ad-slot'>Advertisement</div>
+    </aside>
+    <!-- Footer links and legal -->
+    <footer>
+      <div id='bz-footer-links'>
+        <b:section id='bz-footer-links' class='section' showaddelement='no' maxwidgets='1'>
+          <b:widget id='LinkList2' type='LinkList' locked='false' title='Footer Links'/>
+        </b:section>
+      </div>
+      <div id='bz-footer-legal'>
+        <span>© <data:blog.title/></span>
+        <span class='bz-badge'>Powered by BZ</span>
+      </div>
+    </footer>
+  </body>
+</html>

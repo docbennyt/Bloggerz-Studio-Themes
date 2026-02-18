@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html b:version="2" expr:dir="data:blog.languageDirection"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://www.google.com/2005/gml/b"
+      xmlns:data="http://www.google.com/2005/gml/data"
+      xmlns:expr="http://www.google.com/2005/gml/expr">
+  <head>
+    <title><data:blog.pageTitle/></title>
+    <!-- Include Blogger default metadata and scripts -->
+    <b:include data='blog' name='all-head-content'/>
+    <!-- Scholar Hive CSS skin -->
+    <b:skin><![CDATA[
+      /*
+       * Scholar Hive Theme
+       * A structured, academic theme for education and study resource blogs.
+       * Offers dynamic subject filtering, automatic table of contents, reading progress
+       * and time indicators, call‑out boxes and more. This free theme competes
+       * head‑to‑head with premium educational templates.
+       */
+      :root {
+        --sh-bg: #f8fafc;
+        --sh-surface: #ffffff;
+        --sh-text: #1e293b;
+        --sh-primary: #2563eb;
+        --sh-secondary: #b91c1c;
+        --sh-radius: 4px;
+      }
+      body.dark-mode {
+        --sh-bg: #0f172a;
+        --sh-surface: #1e293b;
+        --sh-text: #e2e8f0;
+        --sh-primary: #3b82f6;
+        --sh-secondary: #ef4444;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", "Helvetica Neue", sans-serif;
+        background: var(--sh-bg);
+        color: var(--sh-text);
+        line-height: 1.7;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      a {
+        color: var(--sh-primary);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      /* Reading progress bar */
+      #progress-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: rgba(0, 0, 0, 0.05);
+        z-index: 100;
+      }
+      #reading-progress {
+        height: 100%;
+        width: 0;
+        background: var(--sh-primary);
+        transition: width 0.1s ease;
+      }
+      /* Header styling */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 90;
+        background: var(--sh-surface);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      }
+      #bz-ads-header {
+        text-align: center;
+        padding: 0.25rem;
+        font-size: 0.875rem;
+      }
+      #bz-nav-pages {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+      }
+      #bz-nav-pages ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 1rem;
+      }
+      #bz-nav-pages li { margin: 0; }
+      #bz-nav-pages a { font-weight: 600; }
+      .nav-toggle {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .action-button {
+        background: none;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--sh-radius);
+        color: var(--sh-text);
+      }
+      .action-button:hover {
+        background: rgba(0,0,0,0.05);
+      }
+      @media (max-width: 768px) {
+        #bz-nav-pages ul {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          margin-top: 0.5rem;
+        }
+        #bz-nav-pages.active ul { display: flex; }
+        .nav-toggle { display: block; }
+      }
+      /* Subject filter bar */
+      #subject-filter {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: var(--sh-surface);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        overflow-x: auto;
+      }
+      #subject-filter a {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.875rem;
+        border: 1px solid var(--sh-primary);
+        border-radius: var(--sh-radius);
+        color: var(--sh-primary);
+        background: var(--sh-surface);
+        white-space: nowrap;
+      }
+      #subject-filter a.active {
+        background: var(--sh-primary);
+        color: #ffffff;
+      }
+      /* Hero section */
+      #hero {
+        background: var(--sh-surface);
+        padding: 2rem 1rem;
+        text-align: center;
+      }
+      #hero h1, #hero h2, #hero p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      /* Main grid */
+      main#main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .post {
+        background: var(--sh-surface);
+        border-radius: var(--sh-radius);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        padding: 1.5rem;
+        transition: transform 0.1s ease;
+      }
+      .post:hover {
+        transform: translateY(-2px);
+      }
+      .post h2 {
+        margin-top: 0;
+        font-size: 1.25rem;
+      }
+      .post .post-meta {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+      }
+      .post .post-excerpt {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: #475569;
+      }
+      .reading-time {
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+      /* Table of contents */
+      #toc-container {
+        margin: 1rem 0;
+        padding: 1rem;
+        border-left: 4px solid var(--sh-primary);
+        background: var(--sh-surface);
+        border-radius: var(--sh-radius);
+      }
+      #toc-container h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+      #toc-container ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      #toc-container li {
+        margin: 0.25rem 0;
+        font-size: 0.875rem;
+      }
+      #toc-container a {
+        color: var(--sh-primary);
+        text-decoration: none;
+      }
+      #toc-container a:hover {
+        text-decoration: underline;
+      }
+      /* Call‑out boxes */
+      .download-box, .summary-box, .formula-box {
+        margin: 1rem 0;
+        padding: 1rem;
+        border-left: 4px solid var(--sh-primary);
+        background: var(--sh-surface);
+        border-radius: var(--sh-radius);
+      }
+      .summary-box {
+        border-left-color: var(--sh-secondary);
+      }
+      .formula-box {
+        font-family: "Courier New", monospace;
+      }
+      /* Sidebar */
+      aside#sidebar {
+        max-width: 300px;
+        padding: 1rem;
+        margin: 0 auto;
+      }
+      aside#sidebar .widget {
+        background: var(--sh-surface);
+        padding: 1rem;
+        border-radius: var(--sh-radius);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        margin-bottom: 1rem;
+      }
+      .ad-slot {
+        background: var(--sh-surface);
+        border: 1px dashed rgba(0,0,0,0.2);
+        border-radius: var(--sh-radius);
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: #64748b;
+        margin-bottom: 1rem;
+      }
+      /* Footer */
+      footer {
+        background: var(--sh-surface);
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.75rem;
+        color: #64748b;
+        border-top: 1px solid rgba(0,0,0,0.05);
+      }
+      #bz-footer-links {
+        margin-bottom: 0.5rem;
+      }
+      #bz-footer-links ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      #bz-footer-links a { font-weight: 500; }
+      #bz-footer-legal {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .bz-badge {
+        background: rgba(0,0,0,0.05);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        color: var(--sh-text);
+      }
+      /* Back to top button */
+      #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 1rem;
+        display: none;
+        background: var(--sh-primary);
+        color: #ffffff;
+        border: none;
+        border-radius: var(--sh-radius);
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        font-size: 0.875rem;
+        z-index: 90;
+      }
+      #back-to-top:hover {
+        background: #1d4ed8;
+      }
+    ]]></b:skin>
+  </head>
+  <body expr:class='post'>
+    <!-- Reading progress bar -->
+    <div id='progress-container'><div id='reading-progress'></div></div>
+    <!-- Header with ad and navigation -->
+    <header>
+      <!-- Top advertisement banner -->
+      <b:section id='bz-ads-header' class='section' showaddelement='yes' maxwidgets='1'>
+        <b:widget id='HTML1' type='HTML' locked='false' title='Header Ad'/>
+      </b:section>
+      <div id='bz-nav-pages'>
+        <span class='nav-toggle' onclick='this.parentNode.classList.toggle("active")'>☰</span>
+        <b:section id='bz-nav-pages' class='section' showaddelement='no' maxwidgets='1'>
+          <b:widget id='PageList1' type='PageList' locked='false' title='Pages'/>
+        </b:section>
+        <div class='header-actions'>
+          <button id='dark-toggle' class='action-button' title='Toggle dark mode'>🌙</button>
+        </div>
+      </div>
+    </header>
+    <!-- Subject filter bar -->
+    <div id='subject-filter'>
+      <b:section id='subject-filter' class='section' showaddelement='no' maxwidgets='1'>
+        <b:widget id='LinkList1' type='LinkList' locked='false' title='Subjects'/>
+      </b:section>
+    </div>
+    <!-- Hero section -->
+    <section id='hero'>
+      <b:section id='hero' class='section' showaddelement='yes' maxwidgets='1'>
+        <b:widget id='HTML2' type='HTML' locked='false' title='Hero Section'/>
+      </b:section>
+    </section>
+    <!-- Main content area -->
+    <main id='main'>
+      <b:section id='main' class='section' showaddelement='no' maxwidgets='1'>
+        <b:widget id='Blog1' type='Blog' locked='false' title='Blog Posts'/>
+      </b:section>
+    </main>
+    <!-- Sidebar for profile and categories -->
+    <aside id='sidebar'>
+      <b:section id='sidebar' class='section' showaddelement='no' maxwidgets='2'>
+        <b:widget id='Profile1' type='Profile' locked='false' title='About Author'/>
+        <b:widget id='Label1' type='Label' locked='false' title='Labels'/>
+      </b:section>
+      <div class='ad-slot'>Advertisement</div>
+    </aside>
+    <!-- Back to top button -->
+    <button id='back-to-top' aria-label='Back to top'>↑</button>
+    <!-- Footer -->
+    <footer>
+      <div id='bz-footer-links'>
+        <b:section id='bz-footer-links' class='section' showaddelement='no' maxwidgets='1'>
+          <b:widget id='LinkList2' type='LinkList' locked='false' title='Footer Links'/>
+        </b:section>
+      </div>
+      <div id='bz-footer-legal'>
+        <span>© <data:blog.title/></span>
+        <span class='bz-badge'>Powered by BZ</span>
+      </div>
+    </footer>
+    <!-- Scripts for progress bar, reading time, dark toggle, subject filter, TOC and back to top -->
+    <script type='text/javascript'>
+      //<![CDATA[
+      (function() {
+        // Update reading progress on scroll
+        function updateProgress() {
+          var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          var scrolled = (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
+          var percentage = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+          var bar = document.getElementById('reading-progress');
+          if (bar) bar.style.width = percentage + '%';
+        }
+        window.addEventListener('scroll', updateProgress);
+        document.addEventListener('DOMContentLoaded', function() {
+          // Reading time calculation for each post
+          var posts = document.querySelectorAll('.post');
+          posts.forEach(function(post) {
+            var body = post.querySelector('.post-body');
+            var timeSpan = post.querySelector('.reading-time');
+            if (body && timeSpan) {
+              var text = body.innerText || body.textContent || '';
+              var words = text.trim().split(/\s+/).length;
+              var minutes = Math.max(1, Math.ceil(words / 200));
+              timeSpan.textContent = minutes + ' min read';
+            }
+          });
+          // Dark mode toggle
+          var darkToggle = document.getElementById('dark-toggle');
+          if (darkToggle) {
+            darkToggle.addEventListener('click', function() {
+              document.body.classList.toggle('dark-mode');
+            });
+          }
+          // Back to top functionality
+          var backToTop = document.getElementById('back-to-top');
+          if (backToTop) {
+            window.addEventListener('scroll', function() {
+              if (window.pageYOffset > 400) {
+                backToTop.style.display = 'block';
+              } else {
+                backToTop.style.display = 'none';
+              }
+            });
+            backToTop.addEventListener('click', function() {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+          }
+          // Subject filter interactions
+          var filterBar = document.getElementById('subject-filter');
+          if (filterBar) {
+            var filterLinks = filterBar.querySelectorAll('a');
+            filterLinks.forEach(function(link) {
+              link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Determine subject key from href or data attribute
+                var href = this.getAttribute('href') || '';
+                var subject = href.replace('#','').toLowerCase();
+                if (!subject) subject = this.getAttribute('data-subject') || '';
+                // Update active class
+                filterLinks.forEach(function(l) { l.classList.remove('active'); });
+                this.classList.add('active');
+                // Filter posts on home page
+                var postsList = document.querySelectorAll('.post');
+                postsList.forEach(function(post) {
+                  var pSubject = post.getAttribute('data-subject');
+                  if (!pSubject) {
+                    var labelEl = post.querySelector('.post-labels a');
+                    pSubject = labelEl ? labelEl.textContent.trim().toLowerCase() : '';
+                    post.setAttribute('data-subject', pSubject);
+                  }
+                  if (subject === 'all' || subject === '' || pSubject === subject) {
+                    post.style.display = '';
+                  } else {
+                    post.style.display = 'none';
+                  }
+                });
+              });
+            });
+          }
+          // Auto-generate table of contents in posts
+          var articlePosts = document.querySelectorAll('.post');
+          articlePosts.forEach(function(post) {
+            var body = post.querySelector('.post-body');
+            if (!body) return;
+            var headings = body.querySelectorAll('h2, h3, h4');
+            if (headings.length > 2) {
+              var toc = document.createElement('div');
+              toc.id = 'toc-container';
+              var title = document.createElement('h3');
+              title.textContent = 'Contents';
+              toc.appendChild(title);
+              var ul = document.createElement('ul');
+              toc.appendChild(ul);
+              headings.forEach(function(h, idx) {
+                if (!h.id) {
+                  var slug = h.textContent.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-');
+                  h.id = slug || ('section-' + idx);
+                }
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = '#' + h.id;
+                a.textContent = h.textContent;
+                li.appendChild(a);
+                ul.appendChild(li);
+              });
+              body.insertBefore(toc, body.firstChild);
+            }
+          });
+        });
+      })();
+      //]]>
+    </script>
+  </body>
+</html>
